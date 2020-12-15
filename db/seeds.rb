@@ -14,16 +14,32 @@ Article.destroy_all
 Interest.destroy_all
 Favorite.destroy_all
 User.destroy_all
-UserInterest.destroy_all
+# UserInterest.destroy_all
 # FavoriteArticle.destroy_all
 
-interest1 = Interest.create!(topic: "Sports")
-interest2 = Interest.create!(topic: "Science")
-interest3 = Interest.create!(topic: "General")
+# FavoriteArticle.destroy_all
+
+# interest1 = Interest.create!(topic: "Sports")
+# interest2 = Interest.create!(topic: "Science")
+# interest3 = Interest.create!(topic: "General")
 
 user1 = User.create!(name: "Bryam", username: "Bryam123", password_digest: "123", email: "Bryam123@gmail.com")
-user_interest1 = UserInterest.create!(user_id: user1.id, interest_id: interest3.id)
+# user_interest1 = UserInterest.create!(user_id: user1.id, interest_id: interest3.id)
 fav1 = Favorite.create!(user_id: user1.id, name: "my lit list" )
+
+general_articles_response = RestClient.get("https://newsapi.org/v2/top-headlines?country=us&category=general&apiKey=#{ENV['NEWS_API_KEY']}")
+general_articles_data = JSON.parse(general_articles_response)
+general_articles_data["articles"].each do |article|
+    add_category = Article.new(article)
+    add_category.category = "General"
+    add_category.favorite_id = fav1.id
+    # binding.pry
+    add_category.save
+end
+
+# favorited_article1 = FavoriteArticle.create!(article_id: Article.all.first.id, favorite_id: fav1.id)
+
+
 # sports_articles_response = RestClient.get("https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=#{ENV['NEWS_API_KEY']}")
 # sports_articles_data = JSON.parse(sports_articles_response)
 # sports_articles_data["articles"].map do |article|
@@ -39,17 +55,6 @@ fav1 = Favorite.create!(user_id: user1.id, name: "my lit list" )
 #     add_category.category = "Science"
 #     add_category.save
 # end
-
-general_articles_response = RestClient.get("https://newsapi.org/v2/top-headlines?country=us&category=general&apiKey=#{ENV['NEWS_API_KEY']}")
-general_articles_data = JSON.parse(general_articles_response)
-general_articles_data["articles"].each do |article|
-    add_category = Article.new(article)
-    add_category.category = "General"
-    add_category.favorite_id = fav1.id
-    # binding.pry
-    add_category.save
-end
-
 
 
 

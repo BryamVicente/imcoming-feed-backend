@@ -30,7 +30,7 @@ class Api::V1::FavoritesController < ApplicationController
     # private 
 
     # def favorite_params 
-    #     params.require(:favorite).permit(:user_id, :article_id, :review)
+    #     params.require(:favorite).permit(:user_id )
     # end 
 
     def index
@@ -44,7 +44,7 @@ class Api::V1::FavoritesController < ApplicationController
     end 
 
     def create
-        byebug
+        # byebug
         favorite = Favorite.create!(favorite_params)
         render json: favorite 
     end 
@@ -66,7 +66,7 @@ class Api::V1::FavoritesController < ApplicationController
     private
 
     def favorite_params
-        params.require(:favorite).permit(:article_id, :user_id)
+        params.require(:favorite).permit(:user_id, :name)
     end 
     
 
