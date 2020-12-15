@@ -23,16 +23,16 @@ ActiveRecord::Schema.define(version: 2020_12_11_203823) do
     t.string "description"
     t.string "url"
     t.string "urlToImage"
-    t.text "content"
+    t.string "content"
     t.string "publishedAt"
+    t.integer "favorite_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "article_id"
-    t.string "review"
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

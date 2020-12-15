@@ -8,9 +8,9 @@ class CreateArticles < ActiveRecord::Migration[6.0]
       t.string :description 
       t.string :url
       t.string :urlToImage
-      t.text :content
+      t.string :content
       t.string :publishedAt
-
+      t.integer :favorite_id
       t.timestamps
     end
   end

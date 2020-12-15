@@ -5,6 +5,9 @@ Rails.application.routes.draw do
       resources :interests 
       resources :articles 
       resources :favorites  
+      resources :favorite_articles
+      resources :users
+      
 
     end
   end

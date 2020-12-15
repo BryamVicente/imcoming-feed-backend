@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+    has_many :user_interests
+    has_many :interests, through: :user_interests
     has_many :favorites
-    has_many :articles, through: :favorites
 end
