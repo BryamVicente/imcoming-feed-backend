@@ -10,7 +10,7 @@ class CreateArticles < ActiveRecord::Migration[6.0]
       t.string :urlToImage
       t.string :content
       t.string :publishedAt
-      t.integer :favorite_id
+     
       t.timestamps
     end
   end

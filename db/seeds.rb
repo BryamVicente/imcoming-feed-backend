@@ -15,7 +15,7 @@ Interest.destroy_all
 Favorite.destroy_all
 User.destroy_all
 # UserInterest.destroy_all
-# FavoriteArticle.destroy_all
+FavoriteArticle.destroy_all
 
 # FavoriteArticle.destroy_all
 
@@ -32,12 +32,12 @@ general_articles_data = JSON.parse(general_articles_response)
 general_articles_data["articles"].each do |article|
     add_category = Article.new(article)
     add_category.category = "General"
-    add_category.favorite_id = fav1.id
+    # add_category.favorite_id = fav1.id
     # binding.pry
     add_category.save
 end
 
-# favorited_article1 = FavoriteArticle.create!(article_id: Article.all.first.id, favorite_id: fav1.id)
+favorited_article1 = FavoriteArticle.create!(article_id: Article.all.first.id, favorite_id: fav1.id, review: "what the hell!!!!!")
 
 
 # sports_articles_response = RestClient.get("https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=#{ENV['NEWS_API_KEY']}")

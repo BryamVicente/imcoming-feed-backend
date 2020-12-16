@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_11_203823) do
+ActiveRecord::Schema.define(version: 2020_12_15_220844) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,7 +25,14 @@ ActiveRecord::Schema.define(version: 2020_12_11_203823) do
     t.string "urlToImage"
     t.string "content"
     t.string "publishedAt"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "favorite_articles", force: :cascade do |t|
+    t.integer "article_id"
     t.integer "favorite_id"
+    t.string "review"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
