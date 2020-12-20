@@ -23,31 +23,38 @@ interest1 = Interest.create!(topic: "Sports")
 interest2 = Interest.create!(topic: "Science")
 interest3 = Interest.create!(topic: "General")
 
+category_choice1 = CategoryChoice.create!(name: "Sports")
+category_choice2 = CategoryChoice.create!(name: "Science")
+category_choice3 = CategoryChoice.create!(name: "Business")
+
 user1 = User.create!(name: "Bryam", username: "Bryam123", password_digest: "123", email: "Bryam123@gmail.com")
 user_interest1 = UserInterest.create!(user_id: user1.id, interest_id: interest3.id)
 fav1 = Favorite.create!(user_id: user1.id, name: "my lit list" )
 
-general_articles_response = RestClient.get("https://newsapi.org/v2/top-headlines?country=us&category=general&apiKey=#{ENV['NEWS_API_KEY']}")
+general_articles_response = RestClient.get("https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=#{ENV['NEWS_API_KEY']}")
 general_articles_data = JSON.parse(general_articles_response)
 general_articles_data["articles"].each do |article|
     add_category = Article.new(article)
-    add_category.category = "General"
+    add_category.category = "Business"
+    add_category.category_choice_id = category_choice3.id
     add_category.save
 end
 
-sports_articles_response = RestClient.get("https://newsapi.org/v2/top-headlines?country=us&category=general&apiKey=#{ENV['NEWS_API_KEY']}")
+sports_articles_response = RestClient.get("https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=#{ENV['NEWS_API_KEY']}")
 sports_articles_data = JSON.parse(sports_articles_response)
 sports_articles_data["articles"].each do |article|
     add_category = Article.new(article)
     add_category.category = "Sport"
+    add_category.category_choice_id = category_choice1.id
     add_category.save
 end
 
-science_articles_response = RestClient.get("https://newsapi.org/v2/top-headlines?country=us&category=general&apiKey=#{ENV['NEWS_API_KEY']}")
+science_articles_response = RestClient.get("https://newsapi.org/v2/top-headlines?country=us&category=science&apiKey=#{ENV['NEWS_API_KEY']}")
 science_articles_data = JSON.parse(science_articles_response)
 science_articles_data["articles"].each do |article|
     add_category = Article.new(article)
     add_category.category = "Science"
+    add_category.category_choice_id = category_choice2.id
     add_category.save
 end
 
