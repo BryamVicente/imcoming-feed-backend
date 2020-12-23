@@ -31,7 +31,7 @@ gem 'rest-client'
 gem 'figaro'
 gem "pry"
 # gem "dotenv-rails"
-
+gem "will_paginate", "~> 3.3"
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
