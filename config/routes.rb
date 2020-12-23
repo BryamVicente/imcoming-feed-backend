@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resources :favorite_articles
       resources :users
       resources :category_choices
+      resources :user_interests 
 
     end
   end

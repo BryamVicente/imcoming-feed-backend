@@ -17,19 +17,21 @@ User.destroy_all
 UserInterest.destroy_all
 FavoriteArticle.destroy_all
 
-
-
 interest1 = Interest.create!(topic: "Sports")
 interest2 = Interest.create!(topic: "Science")
-interest3 = Interest.create!(topic: "General")
+interest3 = Interest.create!(topic: "Business")
 
 category_choice1 = CategoryChoice.create!(name: "Sports")
 category_choice2 = CategoryChoice.create!(name: "Science")
 category_choice3 = CategoryChoice.create!(name: "Business")
 
-user1 = User.create!(name: "Bryam", username: "Bryam123", password_digest: "123", email: "Bryam123@gmail.com")
-user_interest1 = UserInterest.create!(user_id: user1.id, interest_id: interest3.id)
+user1 = User.create!(name: "Bryam", username: "Bryam123", password_digest: "123", email: "Bryam123@gmail.com", image: "https://ca.slack-edge.com/T02MD9XTF-U019BJ3UY5B-d57d19806fbb-48")
+# user2 = User.create!(name: "Sabrina", username: "Sabrina123", password_digest: "123", email: "Sabrina123@gmail.com")
+
 fav1 = Favorite.create!(user_id: user1.id, name: "my lit list" )
+
+user_interest1 = UserInterest.create!(user_id: user1.id, interest_id: interest1.id)
+user_interest2 = UserInterest.create!(user_id: user1.id, interest_id: interest2.id)
 
 general_articles_response = RestClient.get("https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=#{ENV['NEWS_API_KEY']}")
 general_articles_data = JSON.parse(general_articles_response)
