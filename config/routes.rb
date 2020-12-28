@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       resources :users
       resources :category_choices
       resources :user_interests 
-
+      resources :weather
     end
   end
 end

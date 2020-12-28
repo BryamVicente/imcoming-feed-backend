@@ -30,6 +30,7 @@ gem "json"
 gem 'rest-client'
 gem 'figaro'
 gem "pry"
+gem 'uri'
 # gem "dotenv-rails"
 
 group :development, :test do
