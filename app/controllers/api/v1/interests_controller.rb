@@ -1,4 +1,7 @@
 class Api::V1::InterestsController < ApplicationController
+
+    skip_before_action :authorized, only: [:show, :index]
+
     def index 
         interests = Interest.all 
         render json: interests

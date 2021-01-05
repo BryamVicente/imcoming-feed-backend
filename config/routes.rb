@@ -6,10 +6,13 @@ Rails.application.routes.draw do
       resources :articles 
       resources :favorites  
       resources :favorite_articles
-      resources :users
       resources :category_choices
       resources :user_interests 
-      resources :weather
+      resources :users
+      post '/login', to: 'auth#create'
+      get '/profile', to: 'users#profile'
     end
   end
-end
+end 
+  
+  

@@ -1,4 +1,7 @@
 class Api::V1::FavoriteArticlesController < ApplicationController
+
+    skip_before_action :authorized 
+
     def index
         favorite_aricles = FavoriteArticle.all
         render json: favorite_aricles

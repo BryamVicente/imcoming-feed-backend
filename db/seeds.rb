@@ -24,9 +24,14 @@ interest3 = Interest.create!(topic: "Business")
 category_choice1 = CategoryChoice.create!(name: "Sports")
 category_choice2 = CategoryChoice.create!(name: "Science")
 category_choice3 = CategoryChoice.create!(name: "Business")
+category_choice4 = CategoryChoice.create!(name: "Technology")
+category_choice5 = CategoryChoice.create!(name: "Health")
+category_choice6 = CategoryChoice.create!(name: "Politics")
 
-user1 = User.create!(name: "Bryam", username: "Bryam123", password_digest: "123", email: "Bryam123@gmail.com", image: Faker::Avatar.image(slug: "my-own-slug") )
-# user2 = User.create!(name: "Sabrina", username: "Sabrina123", password_digest: "123", email: "Sabrina123@gmail.com")
+
+
+user1 = User.create!(name: "Bryam", username: "Bryam123", password: "123", email: "Bryam123@gmail.com", image: Faker::Avatar.image(slug: "my-own-slug") )
+user2 = User.create!(name: "Sabrina", username: "Sabrina123", password_digest: "123", email: "Sabrina123@gmail.com", image: Faker::Avatar.image(slug: "my-own-slug"))
 
 fav1 = Favorite.create!(user_id: user1.id, name: "my lit list" )
 
@@ -59,6 +64,34 @@ science_articles_data["articles"].each do |article|
     add_category.category_choice_id = category_choice2.id
     add_category.save
 end
+
+technology_articles_response = RestClient.get("https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=#{ENV['NEWS_API_KEY']}")
+technology_articles_data = JSON.parse(technology_articles_response)
+technology_articles_data["articles"].each do |article|
+    add_category = Article.new(article)
+    add_category.category = "Technology"
+    add_category.category_choice_id = category_choice4.id
+    add_category.save
+end
+
+health_articles_response = RestClient.get("https://newsapi.org/v2/top-headlines?country=us&category=health&apiKey=#{ENV['NEWS_API_KEY']}")
+health_articles_data = JSON.parse(health_articles_response)
+health_articles_data["articles"].each do |article|
+    add_category = Article.new(article)
+    add_category.category = "Health"
+    add_category.category_choice_id = category_choice5.id
+    add_category.save
+end
+
+politics_articles_response = RestClient.get("https://newsapi.org/v2/top-headlines?country=us&category=politics&apiKey=#{ENV['NEWS_API_KEY']}")
+politics_articles_data = JSON.parse(politics_articles_response)
+politics_articles_data["articles"].each do |article|
+    add_category = Article.new(article)
+    add_category.category = "Politics"
+    add_category.category_choice_id = category_choice6.id
+    add_category.save
+end
+
 
 favorited_article1 = FavoriteArticle.create!(article_id: Article.all.first.id, favorite_id: fav1.id, review: "what the hell!!!!!")
 
